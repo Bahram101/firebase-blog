@@ -6,13 +6,18 @@ const Navs = ({ isAuth, signUserOut }) => {
     <nav className="flex justify-around">
       <div className="left">
         <Link to="/">Home</Link>
-        {isAuth && <Link to="/create-post">Create post</Link>}
+        <Link to="/contact">Contact</Link>
       </div>
       <div className="right">
         {!isAuth ? (
           <Link to="/login">Login</Link>
         ) : (
-          <button onClick={signUserOut} className="text-xl">Sign out</button>
+          <>
+            <Link to="/create-post">Create post</Link>
+            <button  onClick={signUserOut} className="text-2xl  border-l-[1px] border-white-900 pl-2">
+                Log out
+            </button>
+          </>
         )}
       </div>
     </nav>

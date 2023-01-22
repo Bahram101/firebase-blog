@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
@@ -7,10 +7,11 @@ import Layout from "./components/Layout";
 import { signOut } from "firebase/auth";
 import { auth } from "./firebase-config";
 import "./App.css";
+import Contact from "./pages/Contact";
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false);
-  const navigate = useNavigate()
+  const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
+  const navigate = useNavigate();
 
   const signUserOut = () => {
     signOut(auth).then((res) => {
@@ -27,8 +28,12 @@ function App() {
         element={<Layout isAuth={isAuth} signUserOut={signUserOut} />}
       >
         <Route index element={<Home />} />
-        <Route path="/create-post" element={<CreatePost />} />
-        <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/create-post" element={<CreatePost isAuth={isAuth} />} />
+        <Route
+          path="/login"
+          element={<Login isAuth={isAuth} setIsAuth={setIsAuth} />}
+        />
       </Route>
     </Routes>
   );

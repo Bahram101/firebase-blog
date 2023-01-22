@@ -6,7 +6,9 @@ const Layout = ({ isAuth, signUserOut }) => {
   return (
     <>
       <Navs isAuth={isAuth} signUserOut={signUserOut} />
-      <Outlet />
+      <div  >
+        <Outlet/>
+      </div>
     </>
   );
 };

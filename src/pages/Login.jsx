@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { auth, provider } from "../firebase-config.js";
 import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({ setIsAuth }) => {
+const Login = ({ isAuth, setIsAuth }) => {
   let navigate = useNavigate();
 
+  useEffect(() => {
+    if (isAuth) {
+      navigate("/");
+    }
+  }, []);
   const signInWithGoogle = () => {
-    signInWithPopup(auth, provider).then((res) => {
+    signInWithPopup(auth, provider).then((currentUser) => {
+      console.log("curUser", currentUser);
       localStorage.setItem("isAuth", true);
       setIsAuth(true);
       navigate("/create-post");
