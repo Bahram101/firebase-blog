@@ -27,7 +27,7 @@ function App() {
         path="/"
         element={<Layout isAuth={isAuth} signUserOut={signUserOut} />}
       >
-        <Route index element={<Home />} />
+        <Route index element={<Home isAuth={isAuth}/>} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/create-post" element={<CreatePost isAuth={isAuth} />} />
         <Route
